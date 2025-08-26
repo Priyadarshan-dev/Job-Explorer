@@ -2,7 +2,7 @@ import React from "react";
 
 function Card({ logo, posted, title, experience, location, salary, description }) {
     return (
-        <div className="bg-white shadow-md rounded-xl p-4 w-[316px]">
+        <div className="bg-white shadow-md rounded-xl p-4 w-full max-w-[316px] mx-auto">
             <div className="flex justify-between items-start">
                 <img
                     src={logo}
@@ -14,9 +14,12 @@ function Card({ logo, posted, title, experience, location, salary, description }
                 </span>
             </div>
             <h2 className="text-lg font-semibold mt-3">{title}</h2>
-            <div className="flex gap-4 text-gray-600 text-sm mt-2">
+            <div className="flex flex-wrap gap-2 text-gray-600 text-sm mt-2">
+                <img src="/assets/images/1.png" alt="Icon" />
                 <span>{experience}</span>
+                <img src="/assets/images/2.png" alt="Icon" />
                 <span>{location}</span>
+                <img src="/assets/images/3.png" alt="Icon" />
                 <span>{salary}</span>
             </div>
             <ul className="text-gray-500 text-sm mt-3 list-disc pl-4">
