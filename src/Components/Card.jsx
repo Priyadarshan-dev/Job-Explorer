@@ -36,7 +36,8 @@ function Card({ logo, posted, title, experience, location, salary, description, 
 
   return (
     <>
-      <div className="bg-white shadow-md rounded-xl p-4 w-full max-w-[316px] mx-auto">
+      <div className="bg-white shadow-md rounded-xl p-4 w-full h-full">
+
         <div className="flex justify-between items-start">
           <img
             src={logo}
