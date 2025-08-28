@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Navbar from "./Layout/Navbar";
 import Body from "./Layout/Body";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [allJobs] = useState([
@@ -95,10 +97,28 @@ function App() {
   ]);
   const [jobs, setJobs] = useState(allJobs);
 
+  const handleCreateJob = (newJob) => {
+    setJobs(prevJobs => [...prevJobs, newJob]);
+    toast.success("Job created successfully!");
+  };
+
+  const handleDeleteJob = (jobIndex) => {
+    setJobs(prevJobs => prevJobs.filter((_, index) => index !== jobIndex));
+    toast.success("Job deleted successfully!");
+  };
+
+  const handleUpdateJob = (jobIndex, updatedJob) => {
+    setJobs(prevJobs => prevJobs.map((job, index) => 
+      index === jobIndex ? updatedJob : job
+    ));
+    toast.success("Job updated successfully!");
+  };
+
   return (
     <>
-      <Navbar setJobs={setJobs} allJobs={allJobs} />
-      <Body jobs={jobs} />
+      <Navbar setJobs={setJobs} allJobs={allJobs} onCreateJob={handleCreateJob} />
+      <Body jobs={jobs} onDeleteJob={handleDeleteJob} onUpdateJob={handleUpdateJob} />
+      <ToastContainer  autoClose={3000} />
     </>
   );
 }

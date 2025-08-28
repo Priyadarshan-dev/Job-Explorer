@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Modal from '../Components/Modal';
 
-function Navbar({ setJobs, allJobs }) {
+function Navbar({ setJobs, allJobs, onCreateJob }) {
     const [showModal, setShowModal] = useState(false);
     const [showJobTypeDropdown, setShowJobTypeDropdown] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [salaryRange, setSalaryRange] = useState(10);
 
     const handleFilter = (type) => {
         if (type === "All") {
@@ -13,6 +14,15 @@ function Navbar({ setJobs, allJobs }) {
             setJobs(allJobs.filter(job => job.location.toLowerCase() === type.toLowerCase()));
         }
         setShowJobTypeDropdown(false);
+    };
+
+    const handleSalaryFilter = (selectedSalary) => {
+        setSalaryRange(selectedSalary);
+        const filteredJobs = allJobs.filter(job => {
+            const jobSalary = parseInt(job.salary.split(' ')[0]);
+            return jobSalary >= selectedSalary;
+        });
+        setJobs(filteredJobs);
     };
 
     return (
@@ -78,24 +88,25 @@ function Navbar({ setJobs, allJobs }) {
                     </div>
                     <div className="flex flex-col pl-2 md:pl-20 ">
                         <div className="flex justify-between text-sm mb-1">
-                            <span className="text-gray-700">Salary Per Month</span>
-                            <span className="text-gray-500">₹50k - ₹80k</span>
+                            <span className="text-gray-700">Salary </span>
+                            <span className="text-gray-500">{salaryRange} LPA</span>
                         </div>
                         <input
                             type="range"
-                            min="50000"
-                            max="80000"
-                            step="5000"
+                            min="10"
+                            max="20"
+                            step="1"
+                            value={salaryRange}
+                            onChange={(e) => handleSalaryFilter(Number(e.target.value))}
                             className="w-full h-1.5 bg-gray-300 rounded-lg appearance-none cursor-pointer"
                         />
                     </div>
                 </div>
 
             </nav>
-            {showModal && <Modal onClose={() => setShowModal(false)} setJobs={setJobs} />}
+            {showModal && <Modal onClose={() => setShowModal(false)} onCreateJob={onCreateJob} />}
         </>
     )
 }
 
 export default Navbar;
-
