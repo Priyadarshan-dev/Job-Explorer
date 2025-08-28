@@ -3,7 +3,7 @@ import Card from "../Components/Card";
 
 function Body({ jobs, onDeleteJob, onUpdateJob }) {
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center gap-x-4 gap-y-6 mt-10 px-4 sm:px-6 lg:px-8 xl:px-15 sm:w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center gap-6 mt-10 px-4 sm:px-6 lg:px-8 xl:px-15 sm:w-full pb-10">
             {jobs.map((job, index) => (
                 <Card
                     key={index}
